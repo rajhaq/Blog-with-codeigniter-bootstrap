@@ -1,0 +1,14 @@
+img {
+  vertical-align: middle;
+  width: 100%;
+  height: auto;
+}
+date {
+    font-size: 50px;
+    line-height: 50px;
+}
+center-text {
+    text-align: center;
+    
+    vertical-align: middle;
+}

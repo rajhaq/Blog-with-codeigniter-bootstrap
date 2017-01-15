@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/E:/xampp/htdocs/codeigniter/application/config/routes.php</file>
+            <file>file:/E:/xampp/htdocs/codeigniter/system/database/DB.php</file>
+            <file>file:/E:/xampp/htdocs/codeigniter/application/views/pages/about.php</file>
+            <file>file:/E:/xampp/htdocs/codeigniter/application/config/profiler.php</file>
+            <file>file:/E:/xampp/htdocs/codeigniter/application/controllers/News.php</file>
+            <file>file:/E:/xampp/htdocs/codeigniter/application/views/blog/home.php</file>
+            <file>file:/E:/xampp/htdocs/codeigniter/application/views/news/index.php</file>
+            <file>file:/E:/xampp/htdocs/codeigniter/application/views/templates/footer.php</file>
+            <file>file:/E:/xampp/htdocs/codeigniter/application/views/blog/blogbody.php</file>
+            <file>file:/E:/xampp/htdocs/codeigniter/application/controllers/index.html</file>
+            <file>file:/E:/xampp/htdocs/codeigniter/application/views/news/create.php</file>
+            <file>file:/E:/xampp/htdocs/codeigniter/application/views/news/view.php</file>
+            <file>file:/E:/xampp/htdocs/codeigniter/application/config/config.php</file>
+            <file>file:/E:/xampp/htdocs/codeigniter/application/controllers/Pages.php</file>
+            <file>file:/E:/xampp/htdocs/codeigniter/application/models/News_model.php</file>
+            <file>file:/E:/xampp/htdocs/codeigniter/application/views/news/success.php</file>
+            <file>file:/E:/xampp/htdocs/codeigniter/index.php</file>
+            <file>file:/E:/xampp/htdocs/codeigniter/application/views/pages/home.php</file>
+            <file>file:/E:/xampp/htdocs/codeigniter/application/views/blog/topimage.php</file>
+            <file>file:/E:/xampp/htdocs/codeigniter/css/bootstrap.css</file>
+            <file>file:/E:/xampp/htdocs/codeigniter/application/views/templates/header.php</file>
+            <file>file:/E:/xampp/htdocs/codeigniter/application/controllers/Welcome.php</file>
+            <file>file:/E:/xampp/htdocs/codeigniter/css/style.css</file>
+            <file>file:/E:/xampp/htdocs/codeigniter/application/index.html</file>
+            <file>file:/E:/xampp/htdocs/codeigniter/application/config/database.php</file>
+        </group>
+    </open-files>
+</project-private>
