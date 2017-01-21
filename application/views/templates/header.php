@@ -1,11 +1,11 @@
 <html>
         <head>
 
-            <link href="css/bootstrap.css" rel="stylesheet">
-            <link href="css/style.css" rel="stylesheet">
-            <script src="js/jquery.js"></script>
-            <script src="js/bootstrap.js"></script>
-            <title>CodeIgniter Tutorial</title>
+            <link href="/codetest/css/bootstrap.css" rel="stylesheet">
+            <link href="/codetest/css/style.css" rel="stylesheet">
+            <script src="/codetest/js/jquery.js"></script>
+            <script src="/codetest/js/bootstrap.js"></script>
+            <title><?php echo $title ?></title>
         </head>
         <body>
      <nav class="navbar navbar-wrapper navbar-static-top">
