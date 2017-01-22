@@ -7,9 +7,37 @@ class Category_model extends CI_Model {
     }
     public function add_cat()
     {
+        $lettersNumbersSpacesHyphens = '/[^\-\s\pN\pL]+/u';
+        $spacesDuplicateHypens = '/[\-\s]+/';
+        $slug = preg_replace($lettersNumbersSpacesHyphens, '', $this->input->post('catName'));
+        $slug = preg_replace($spacesDuplicateHypens, '-', $slug);
+        $slug = trim($slug, '-');
         $data = array(
-            'name' => $this->input->post('catName'),
-        );
+                    'name' => $this->input->post('catName'),
+                    'slug' => $slug
+                );
         return $this->db->insert('blog_category', $data);
     }
+     public function allCat() {
+        $this->db->select('*');
+        $this->db->from('blog_category');
+        $query = $this->db->get();
+        if (!$query->num_rows()) {
+            return false;
+        }
+        else {
+            return $query->result_array();
+        }
+    }
+    function isExist($name) {
+        $this->db->select('id');
+        $this->db->where('name', $name);
+        $query = $this->db->get('blog_category');
+
+        if ($query->num_rows() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+}
 }

@@ -7,55 +7,58 @@ class Dashboard extends CI_Controller {
         parent::__construct();
         $this->load->model('category_model');
         $this->load->helper('url_helper');
+        $this->load->helper('common_helper');
         $this->load->helper('url');
         $this->load->library('session');
         $this->load->library('form_validation');
+        $data['flag'] = false;   
     }
     public function index($page = 'dashboard') {
-            $this->load->helper('url');
-            $data['title'] = ucfirst($page); // Capitalize the first letter
-            $this->load->view('templates/header', $data);
-            $this->load->view('dashboard/index', $data);
-            $this->load->view('templates/footer', $data);
-
+        $data['category'] = $this->category_model->allCat();           
+        $data['flag'] = false;  
+        $this->load->helper('url');
+        $data['title'] = ucfirst($page); // Capitalize the first letter
+        $this->load->view('templates/header', $data);
+        $this->load->view('dashboard/index', $data);
+        $this->load->view('templates/footer', $data);
     }
     public function category($page = 'category') {
-            $this->load->helper('url');
-            $data['title'] = ucfirst($page); // Capitalize the first letter
+        $data['category'] = $this->category_model->allCat();
+        $data['flag'] = false;  
+        $this->load->helper('url');
+        $data['title'] = ucfirst($page); // Capitalize the first letter
+        $this->load->view('templates/header', $data);
+        $this->load->view('dashboard/category', $data);
+        $this->load->view('templates/footer', $data);
+    }
+    public function add($page = 'category') {        
+    
+        $this->load->helper('url');
+        $data['flag'] = false;  
+        $data['flag2'] = false;  
+        $this->form_validation->set_rules('catName', 'Category Name', 'required|is_unique[blog_category.name] ');
+        $data['title'] = ucfirst($page); 
+        if ($this->form_validation->run() === FALSE)
+        {   
+            
+            if($data['category'] = $this->category_model->allCat())
+            {
+                $data['flag2'] = true;  
+            }
             $this->load->view('templates/header', $data);
             $this->load->view('dashboard/category', $data);
             $this->load->view('templates/footer', $data);
-
-    }
-    public function add($page = 'category') {
+        }
+        else
+        {
+            $data['flag'] = true;     
+            $this->category_model->add_cat($this->input->post('catName'));
+            $data['category'] = $this->category_model->allCat();
+            $this->load->view('templates/header', $data);
+            $this->load->view('dashboard/category', $data);
+            $this->load->view('templates/footer', $data);
+        }
         
-            $this->load->helper('url');
-            $this->form_validation->set_rules('catName', 'Category Name', 'required');
-            $data['title'] = ucfirst($page); 
-            if ($this->form_validation->run() === FALSE)
-            {
-            $this->load->view('templates/header', $data);
-            $this->load->view('dashboard/category', $data);
-            $this->load->view('templates/footer', $data);
-            }
-            else
-            {
-                
-            $this->category_model->add_cat();
-            $this->load->view('templates/header', $data);
-            $this->load->view('dashboard/category', $data);
-            $this->load->view('templates/footer', $data);
-            }
-
-
-
     }
-    function createSlug($slug) {
-        $lettersNumbersSpacesHyphens = '/[^\-\s\pN\pL]+/u';
-        $spacesDuplicateHypens = '/[\-\s]+/';
-        $slug = preg_replace($lettersNumbersSpacesHyphens, '', $slug);
-        $slug = preg_replace($spacesDuplicateHypens, '-', $slug);
-        $slug = trim($slug, '-');
-        return mb_strtolower($slug, 'UTF-8');
-    }
+
 }

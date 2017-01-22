@@ -16,126 +16,56 @@
                     <table class="table table-striped">
                       <thead>
                         <tr>
-                          <th>#</th>
-                          <th>Header</th>
-                          <th>Header</th>
-                          <th>Header</th>
-                          <th>Header</th>
+                          <th class="col-md-1" style="text-align: center;">SL.</th>
+                          <th class="col-md-5">Name</th>
+                          <th class="col-md-2" style="text-align: center;">Action</th>
+                          <th class="col-md-2" style="text-align: center;">Mute/Unmute</th>
+                          <th class="col-md-2" style="text-align: center;">Delete</th>
                         </tr>
                       </thead>
                       <tbody>
+                      <?php foreach ($category as $cat_item): ?>
                         <tr>
-                          <td>1,001</td>
-                          <td>Lorem</td>
-                          <td>ipsum</td>
-                          <td>dolor</td>
-                          <td>sit</td>
+                            <td style="text-align: center;"><?php echo $cat_item['id']; ?></td>
+                            <td><?php echo $cat_item['name']; ?></td>
+                            <td style="text-align: center;"><a href="edit/<?php echo $cat_item['id']; ?>"><button type="button" class="btn btn-sm btn-info"> Edit </button></a>
+                            </td>
+                            <td style="text-align: center;"><?php if($cat_item['status']==1){ ?>
+                                <a href="mute/<?php echo $cat_item['id']; ?>"><button type="button" class="btn btn-warning" data-dismiss="modal">Mute</button></a>
+                            <?php }
+                            else
+                            {
+                                ?>
+                                <a href="unmute/<?php echo $cat_item['id']; ?>"><button type="button" class="btn btn-success" data-dismiss="modal">Unmute</button></a>
+                            <?php
+                            }
+                            ?>    
+                            
+                            </td>
+                            <td style="text-align: center;"><button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete<?php echo $cat_item['id']; ?>">Delete</button>
+                            <!-- Modal -->
+                            <div class="modal fade" id="delete<?php echo $cat_item['id']; ?>" role="dialog">
+                              <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Delete Category</h4>
+                                  </div>
+                                  <div class="modal-body">
+                                    <p>Are you sure you want to delete <?php echo $cat_item['name']; ?></p>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-success" data-dismiss="modal">Yes</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                                  </div>
+                                </div>
+
+                              </div>
+                            </div></td>
                         </tr>
-                        <tr>
-                          <td>1,002</td>
-                          <td>amet</td>
-                          <td>consectetur</td>
-                          <td>adipiscing</td>
-                          <td>elit</td>
-                        </tr>
-                        <tr>
-                          <td>1,003</td>
-                          <td>Integer</td>
-                          <td>nec</td>
-                          <td>odio</td>
-                          <td>Praesent</td>
-                        </tr>
-                        <tr>
-                          <td>1,003</td>
-                          <td>libero</td>
-                          <td>Sed</td>
-                          <td>cursus</td>
-                          <td>ante</td>
-                        </tr>
-                        <tr>
-                          <td>1,004</td>
-                          <td>dapibus</td>
-                          <td>diam</td>
-                          <td>Sed</td>
-                          <td>nisi</td>
-                        </tr>
-                        <tr>
-                          <td>1,005</td>
-                          <td>Nulla</td>
-                          <td>quis</td>
-                          <td>sem</td>
-                          <td>at</td>
-                        </tr>
-                        <tr>
-                          <td>1,006</td>
-                          <td>nibh</td>
-                          <td>elementum</td>
-                          <td>imperdiet</td>
-                          <td>Duis</td>
-                        </tr>
-                        <tr>
-                          <td>1,007</td>
-                          <td>sagittis</td>
-                          <td>ipsum</td>
-                          <td>Praesent</td>
-                          <td>mauris</td>
-                        </tr>
-                        <tr>
-                          <td>1,008</td>
-                          <td>Fusce</td>
-                          <td>nec</td>
-                          <td>tellus</td>
-                          <td>sed</td>
-                        </tr>
-                        <tr>
-                          <td>1,009</td>
-                          <td>augue</td>
-                          <td>semper</td>
-                          <td>porta</td>
-                          <td>Mauris</td>
-                        </tr>
-                        <tr>
-                          <td>1,010</td>
-                          <td>massa</td>
-                          <td>Vestibulum</td>
-                          <td>lacinia</td>
-                          <td>arcu</td>
-                        </tr>
-                        <tr>
-                          <td>1,011</td>
-                          <td>eget</td>
-                          <td>nulla</td>
-                          <td>Class</td>
-                          <td>aptent</td>
-                        </tr>
-                        <tr>
-                          <td>1,012</td>
-                          <td>taciti</td>
-                          <td>sociosqu</td>
-                          <td>ad</td>
-                          <td>litora</td>
-                        </tr>
-                        <tr>
-                          <td>1,013</td>
-                          <td>torquent</td>
-                          <td>per</td>
-                          <td>conubia</td>
-                          <td>nostra</td>
-                        </tr>
-                        <tr>
-                          <td>1,014</td>
-                          <td>per</td>
-                          <td>inceptos</td>
-                          <td>himenaeos</td>
-                          <td>Curabitur</td>
-                        </tr>
-                        <tr>
-                          <td>1,015</td>
-                          <td>sodales</td>
-                          <td>ligula</td>
-                          <td>in</td>
-                          <td>libero</td>
-                        </tr>
+                      <?php endforeach; ?>
                       </tbody>
                     </table>
                 </div>
@@ -148,6 +78,14 @@
                 <div class="alert alert-danger alert-dismissible" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <strong>Error!</strong><?php echo validation_errors(); ?>
+                </div>
+                <?php } ?>
+                    <?php
+                    if($flag==true)
+                { ?>
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong></strong><?php echo cat($this->input->post("catName")); ?>
                 </div>
                 <?php } ?>
                 <form class="form-horizontal" action="add" method="post">
