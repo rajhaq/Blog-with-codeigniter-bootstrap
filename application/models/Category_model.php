@@ -5,13 +5,10 @@ class Category_model extends CI_Model {
     {
         $this->load->database();
     }
+    
     public function add_cat()
     {
-        $lettersNumbersSpacesHyphens = '/[^\-\s\pN\pL]+/u';
-        $spacesDuplicateHypens = '/[\-\s]+/';
-        $slug = preg_replace($lettersNumbersSpacesHyphens, '', $this->input->post('catName'));
-        $slug = preg_replace($spacesDuplicateHypens, '-', $slug);
-        $slug = trim($slug, '-');
+        $slug=url_title($this->input->post('catName'), 'dash', TRUE);
         $data = array(
                     'name' => $this->input->post('catName'),
                     'slug' => $slug

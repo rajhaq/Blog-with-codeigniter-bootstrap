@@ -5,18 +5,10 @@ class Dashboard extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('category_model');
-        $this->load->helper('url_helper');
-        $this->load->helper('common_helper');
-        $this->load->helper('url');
-        $this->load->library('session');
-        $this->load->library('form_validation');
-        $data['flag'] = false;   
     }
     public function index($page = 'dashboard') {
-        $data['category'] = $this->category_model->allCat();           
+        $this->load->library('session');
         $data['flag'] = false;  
-        $this->load->helper('url');
         $data['title'] = ucfirst($page); // Capitalize the first letter
         $this->load->view('templates/header', $data);
         $this->load->view('dashboard/index', $data);

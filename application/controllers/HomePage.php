@@ -7,7 +7,7 @@ class HomePage extends CI_Controller {
             	$data['title'] = ucfirst($page); // Capitalize the first letter
 		$this->load->view('templates/header', $data);
 		$this->load->view('blog/topimage', $data);
-		$this->load->view('blog/'.__FUNCTION__, $data);
+		$this->load->view(__CLASS__,__FUNCTION__, $data);
 		$this->load->view('templates/footer', $data);
             
         }

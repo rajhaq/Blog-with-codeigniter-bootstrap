@@ -29,7 +29,7 @@
             echo $username;
             ?></a></li>
             
-            <li><a href="logout"><span class="glyphicon glyphicon-off" aria-hidden="true"> </span> Logout</a></li>
+            <li><a href="<?php echo site_url('login/logout'); ?>"><span class="glyphicon glyphicon-off" aria-hidden="true"> </span> Logout</a></li>
           </ul>
         </div><!--/.nav-collapse -->
         <?php
@@ -38,9 +38,7 @@
         { 
         ?>
        <ul class="nav navbar-nav navbar-right">
-            <li><a href="../navbar/">Not</a></li>
-            <li class="active"><a href="./">logged<span class="sr-only">(current)</span></a></li>
-            <li><a href="../navbar-fixed-top/">in</a></li>
+           <li><a href="<?php echo site_url('login'); ?>">Login</a></li>
           </ul>
         </div><!--/.nav-collapse -->
         <?php 

@@ -12,29 +12,27 @@ class Signin_model extends CI_Model {
     }
     // Read data using username and password
     public function login($data) {
-        $condition = "user_email =" . "'" . $data['email'] . "' AND " . "user_password =" . "'" . $data['password'] . "'";
+ //       $condition = "user_email ='".$email."' , user_password='".$password."'";
         $this->db->select('*');
         $this->db->from('blog_user');
-        $this->db->where($condition);
-        $this->db->limit(1);
+        $this->db->where('blog_user.user_email', $data['email']);
+        $this->db->where('blog_user.user_password', $data['password']);
         $query = $this->db->get();
         if ($query->num_rows() == 1) {
-            return true;
-        }
-        else {
+            return $query->result();
+        } else {
             return false;
         }
     }
     public function read_user_information($email) {
-        $condition = "user_email =" . "'" . $email . "'";
+        $condition = "user_email ='".$email."'";
         $this->db->select('*');
         $this->db->from('blog_user');
         $this->db->where($condition);
-        $this->db->limit(1);
         $query = $this->db->get();
 
         if ($query->num_rows() == 1) {
-            return true;
+            return $query->result();
         }
         else {
             return false;

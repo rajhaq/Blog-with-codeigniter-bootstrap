@@ -3,7 +3,7 @@
     <div class="col-sm-3 col-md-2 sidebar">
       <ul class="nav nav-sidebar">
         <li class="active"><a href="#">Dashboard<span class="sr-only">(current)</span></a></li>
-        <li><a href="category">Category</a></li>
+        <li><a href=" <?php echo site_url('category/index'); ?>">Category</a></li>
         <li><a href="#">Blog</a></li>
         <li><a href="#">Create new</a></li>
       </ul>
@@ -17,12 +17,12 @@
                 <div class="blog33">
           <img src="/codetest/images/user.png" class="img-responsive"  width="200px" height="200px">
           <h4><?php 
-            $username = ($this->session->userdata['logged_in']['username']);
+            $username = $this->session->userdata['logged_in']['username'];
             echo $username;
             ?></h4>
           <span class="text-muted"><?php 
-            $username = ($this->session->userdata['logged_in']['email']);
-            echo $username;
+            $email = $this->session->userdata['logged_in']['email'];
+            echo $email;
             ?></span>
                 </div>
             </div>

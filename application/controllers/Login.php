@@ -1,43 +1,59 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+    
 class Login extends CI_Controller {
     
-            public function __construct()
-        {
-            parent::__construct();
-            $this->load->model('signup_model');
-            $this->load->model('signin_model');
-            $this->load->helper('url_helper');
-            $this->load->library('form_validation');
-            $this->load->helper('url');
-            $this->load->library('session');
-            $pass="null";
-        }
-    
-    public function index($page = 'login') {    
-        $this->load->library('form_validation');
-        $this->load->helper('url');
-        $this->load->library('session');
-        $data['title'] = ucfirst($page); // Capitalize the first letter
-        $this->load->view('templates/header', $data);
-        $this->load->view('user/signin', $data);
-        $this->load->view('templates/footer', $data);
+    public $variable = "";
 
+
+    public function __construct() {
+        parent::__construct();
     }
+                
+    public function index($page = 'login') {  
+        $data['title']= ucfirst($page);
+        if($this->input->post('trigger') == 'do_login'){
+            $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+            $this->form_validation->set_rules('pwd', 'Password', 'required');
+            if($this->form_validation->run() === FALSE){
+                $this->session->set_flashdata('notification', errormessage(validation_errors()));
+                $this->viewLoader(__CLASS__, __FUNCTION__, $data); 
+                redirect(__CLASS__ . '/' . __FUNCTION__, 'refresh');
+            } else {
+                $data_session = array( 'email' => $this->input->post('email'), 'password' => $this->input->post('pwd') );
+                $result = $this->signin_model->login($data_session);
+                if($result !== FALSE){
+                $session_data = array(
+                    'username' => $result[0]->user_name,
+                    'email' => $result[0]->user_email,
+                    'status' => $result[0]->user_status,
+                );
+                    $this->session->set_userdata('logged_in', $session_data);
+                    
+//                    print_r($this->session->userdata('logged_in'));
+                    if($result[0]->user_status == 1) {
+                        redirect('dashboard', 'refresh');
+                    } else {
+                        redirect('homepage', 'refresh');
+                    }
+                } else {
+                    $this->session->set_flashdata('notification', errormessage('Incorrect Username & Password'));
+                    redirect(__CLASS__ . '/' . __FUNCTION__, 'refresh');
+                } 
+            }
+        } else {
+            $this->viewLoader(__CLASS__, __FUNCTION__, $data);
+        }
 
-    public function signup($page = 'signup') {      
-        $this->load->library('form_validation');
+        
+    }
+        
+    public function signup($page = 'signup') {    
         $this->form_validation->set_rules('name', 'Name', 'required');
         $this->form_validation->set_rules('email', 'Email', 'required');
         $this->form_validation->set_rules('pwd', 'Password', 'required');  
-        $this->load->helper('url');
-        $this->load->library('session');
         $data['title'] = ucfirst($page); // Capitalize the first letter
-        $this->load->view('templates/header', $data);
-        $this->load->view('user/signup', $data);
-        $this->load->view('templates/footer', $data);
-
+        $this->viewLoader(__CLASS__, __FUNCTION__, $data);    
     }
     public function create($page = 'signup') {      
         $this->load->library('form_validation');
@@ -45,67 +61,15 @@ class Login extends CI_Controller {
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[blog_user.user_email]');
         $this->form_validation->set_rules('pwd', 'Password', 'required|min_length[8]');  
         $this->form_validation->set_rules('pwd2', 'Password Confirmation', 'required|matches[pwd]');  
-        $this->load->helper('url');
-        $this->load->library('session');
         $data['title'] = ucfirst($page); // Capitalize the first letter
         if ($this->form_validation->run() === FALSE)
         {
-            $this->load->view('templates/header', $data);
-            $this->load->view('user/signup');
-            $this->load->view('templates/footer', $data);
+            $this->viewLoader(__CLASS__, 'signup', $data);
         }
         else
         {
             $this->signup_model->set_user();
-            $this->load->view('templates/header', $data);
-            $this->load->view('blog/topimage', $data);
-            $this->load->view('user/success', $data);
-            $this->load->view('templates/footer', $data);
-        }
-    }
-
-    public function login($page = 'login') {
-        $this->load->library('form_validation');
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
-        $this->form_validation->set_rules('pwd', 'Password', 'required');  
-        $this->load->helper('url');
-        $this->load->library('session');
-        
-        $data['title'] = ucfirst($page);
-        // Capitalize the first letter
-        if ($this->form_validation->run() === FALSE)
-        {
-            $this->load->view('templates/header', $data);
-            $this->load->view('user/signin');
-            $this->load->view('templates/footer', $data);
-        }
-        else
-        {
-            $data_session = array(
-                'email' => $this->input->post('email'),
-                'password' => $this->input->post('pwd')
-            );
-            $result = $this->signin_model->login($data_session);
-            if($result == TRUE){
-                $email = $this->input->post('email');
-                $result = $this->signin_model->read_user_information($email);
-                if ($result != false) {
-                    $session_data = array(
-                    'username' => $result[0]->user_name,
-                    'email' => $result[0]->user_email,
-                    );
-                    $this->session->set_userdata('logged_in', $session_data);
-                    $this->load->view('templates/header', $data);
-//                    $this->load->view('blog/topimage', $data);
-                    $this->load->view('user/success', $data);
-                    $this->load->view('templates/footer', $data);
-                }
-            }
-            else {
-                $this->load->view('templates/header', $data);
-                $this->load->view('user/incorrectsignin', $data);
-                $this->load->view('templates/footer', $data);
-                }            //
+            $this->viewLoader(__CLASS__, 'success', $data);
         }
     }
     public function logout($page = 'login') {
@@ -115,21 +79,9 @@ class Login extends CI_Controller {
             'username' => ''
         );
         $this->session->unset_userdata('logged_in', $sess_array);
-        $this->load->view('templates/header', $data);
-        $this->load->view('user/signin', $data);
-        $this->load->view('templates/footer', $data);
+        $this->viewLoader('homepage','index', $data);
+
     }
-
+        
 }
-
-
-
-
-
-
-
-
-
-
-
 //ref: https://www.formget.com/form-login-codeigniter/
