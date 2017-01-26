@@ -14,20 +14,18 @@ class Category extends CI_Controller {
     }
     public function add($page = 'category') {  
         $data['category'] = $this->category_model->allCat();
-        $data['flag'] = false;  
-        $data['flag2'] = false;  
         $this->form_validation->set_rules('catName', 'Category Name', 'required|is_unique[blog_category.name] ');
         $data['title'] = ucfirst($page); 
         if ($this->form_validation->run() === FALSE)
-        {   
+        {
+        $this->session->set_flashdata('notification', errormessage(validation_errors()));
         $this->viewLoader(__CLASS__,'index', $data);
         }
         else
         {
-            $data['flag'] = true;     
+            $this->session->set_flashdata('notification', successmessage($this->input->post('catName')));
             $this->category_model->add_cat($this->input->post('catName'));
-            $data['category'] = $this->category_model->allCat();
-        $this->viewLoader(__CLASS__,'index', $data);
+            $this->viewLoader(__CLASS__,'index', $data);
         }
         
     }

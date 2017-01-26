@@ -36,9 +36,9 @@ if ( ! function_exists('successmessage')) {
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <strong>Error!</strong> There is something wrong!! Please try again later</div>';
         } else {
-            echo '<div class="alert alert-danger alert-dismissible" role="alert">
+            echo '<div class="alert alert-success alert-dismissible" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <strong>Error!</strong> ' . $slug . ' </div>';
+                    <strong>' . $slug . '</strong> addded </div>';
         }
     }
 }

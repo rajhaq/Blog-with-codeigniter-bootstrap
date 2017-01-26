@@ -2,10 +2,10 @@
   <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
       <ul class="nav nav-sidebar">
-        <li><a href="#">Dashboard</a></li>
-        <li class="active"><a href="category">Category<span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Blog</a></li>
-        <li><a href="#">Create new</a></li>
+        <li><a href="<?php site_url('dashborad/index'); ?>">Dashboard</a></li>
+        <li class="active"><a href="<?php site_url('category/index'); ?>">Category<span class="sr-only">(current)</span></a></li>
+        <li><a href="<?php site_url('blog/index'); ?>">Blog</a></li>
+        <li><a href="<?php site_url('blog/add'); ?>">Create new</a></li>
       </ul>
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">   
@@ -72,22 +72,6 @@
             </div>
             <div class="col-md-4">
                 <h1 class="page-header">Add Category</h1>
-                <?php
-                    if(validation_errors())
-                { ?>
-                <div class="alert alert-danger alert-dismissible" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <strong>Error!</strong><?php echo validation_errors(); ?>
-                </div>
-                <?php } ?>
-                    <?php
-                    if($flag==true)
-                { ?>
-                <div class="alert alert-success alert-dismissible" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <strong></strong><?php echo cat($this->input->post("catName")); ?>
-                </div>
-                <?php } ?>
                 <form class="form-horizontal" action="add" method="post">
                     <div class="form-group">
                       <label class="control-label col-md-3">
